@@ -32,7 +32,7 @@ print(f"純 Python 耗時: {time.time() - start:.2f}s")
 
 ---
 
-## 2️⃣ NumPy 向量化版本（快 7 倍以上）
+## 2️⃣ NumPy 向量化版本
 
 ```python
 import time
