@@ -1,0 +1,2237 @@
+Python
+
+for Algorithmic
+Trading
+From Idea to Cloud Deployment
+
+Yves Hilpisch
+
+Python for Algorithmic Trading
+From Idea to Cloud Deployment
+
+Yves Hilpisch
+
+Beijing
+
+Boston Farnham Sebastopol
+
+Tokyo
+
+Python for Algorithmic Trading
+by Yves Hilpisch
+Copyright © 2021 Yves Hilpisch. All rights reserved.
+Printed in the United States of America.
+Published by O’Reilly Media, Inc., 1005 Gravenstein Highway North, Sebastopol, CA 95472.
+O’Reilly books may be purchased for educational, business, or sales promotional use. Online editions are
+also available for most titles (http://oreilly.com). For more information, contact our corporate/institutional
+sales department: 800-998-9938 or corporate@oreilly.com.
+
+Acquisitions Editor: Michelle Smith
+Development Editor: Michele Cronin
+Production Editor: Daniel Elfanbaum
+Copyeditor: Piper Editorial LLC
+Proofreader: nSight, Inc.
+November 2020:
+
+Indexer: WordCo Indexing Services, Inc.
+Interior Designer: David Futato
+Cover Designer: Jose Marzan
+Illustrator: Kate Dullea
+
+First Edition
+
+Revision History for the First Edition
+2020-11-11: First Release
+See http://oreilly.com/catalog/errata.csp?isbn=9781492053354 for release details.
+The O’Reilly logo is a registered trademark of O’Reilly Media, Inc. Python for Algorithmic Trading, the
+cover image, and related trade dress are trademarks of O’Reilly Media, Inc.
+The views expressed in this work are those of the author, and do not represent the publisher’s views.
+While the publisher and the author have used good faith efforts to ensure that the information and
+instructions contained in this work are accurate, the publisher and the author disclaim all responsibility
+for errors or omissions, including without limitation responsibility for damages resulting from the use of
+or reliance on this work. Use of the information and instructions contained in this work is at your own
+risk. If any code samples or other technology this work contains or describes is subject to open source
+licenses or the intellectual property rights of others, it is your responsibility to ensure that your use
+thereof complies with such licenses and/or rights. This book is not intended as financial advice. Please
+consult a qualified professional if you require financial advice.
+
+978-1-492-05335-4
+[LSI]
+
+Table of Contents
+
+Preface. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ix
+1. Python and Algorithmic Trading. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+Python for Finance
+Python Versus Pseudo-Code
+NumPy and Vectorization
+pandas and the DataFrame Class
+Algorithmic Trading
+Python for Algorithmic Trading
+Focus and Prerequisites
+Trading Strategies
+Simple Moving Averages
+Momentum
+Mean Reversion
+Machine and Deep Learning
+Conclusions
+References and Further Resources
+
+1
+2
+3
+5
+7
+11
+13
+13
+14
+14
+14
+15
+15
+15
+
+2. Python Infrastructure. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+Conda as a Package Manager
+Installing Miniconda
+Basic Operations with Conda
+Conda as a Virtual Environment Manager
+Using Docker Containers
+Docker Images and Containers
+Building a Ubuntu and Python Docker Image
+Using Cloud Instances
+RSA Public and Private Keys
+
+19
+19
+21
+27
+30
+31
+31
+36
+38
+iii
+
+Jupyter Notebook Configuration File
+Installation Script for Python and Jupyter Lab
+Script to Orchestrate the Droplet Set Up
+Conclusions
+References and Further Resources
+
+38
+40
+41
+43
+44
+
+3. Working with Financial Data. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+Reading Financial Data From Different Sources
+The Data Set
+Reading from a CSV File with Python
+Reading from a CSV File with pandas
+Exporting to Excel and JSON
+Reading from Excel and JSON
+Working with Open Data Sources
+Eikon Data API
+Retrieving Historical Structured Data
+Retrieving Historical Unstructured Data
+Storing Financial Data Efficiently
+Storing DataFrame Objects
+Using TsTables
+Storing Data with SQLite3
+Conclusions
+References and Further Resources
+Python Scripts
+
+46
+46
+47
+49
+50
+51
+52
+55
+58
+62
+65
+66
+70
+75
+77
+78
+78
+
+4. Mastering Vectorized Backtesting. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 81
+Making Use of Vectorization
+Vectorization with NumPy
+Vectorization with pandas
+Strategies Based on Simple Moving Averages
+Getting into the Basics
+Generalizing the Approach
+Strategies Based on Momentum
+Getting into the Basics
+Generalizing the Approach
+Strategies Based on Mean Reversion
+Getting into the Basics
+Generalizing the Approach
+Data Snooping and Overfitting
+Conclusions
+References and Further Resources
+Python Scripts
+
+iv
+
+|
+
+Table of Contents
+
+82
+83
+85
+88
+89
+97
+98
+99
+104
+107
+107
+110
+111
+113
+113
+115
+
+SMA Backtesting Class
+Momentum Backtesting Class
+Mean Reversion Backtesting Class
+
+115
+118
+120
+
+5. Predicting Market Movements with Machine Learning. . . . . . . . . . . . . . . . . . . . . . . . . . 123
+Using Linear Regression for Market Movement Prediction
+A Quick Review of Linear Regression
+The Basic Idea for Price Prediction
+Predicting Index Levels
+Predicting Future Returns
+Predicting Future Market Direction
+Vectorized Backtesting of Regression-Based Strategy
+Generalizing the Approach
+Using Machine Learning for Market Movement Prediction
+Linear Regression with scikit-learn
+A Simple Classification Problem
+Using Logistic Regression to Predict Market Direction
+Generalizing the Approach
+Using Deep Learning for Market Movement Prediction
+The Simple Classification Problem Revisited
+Using Deep Neural Networks to Predict Market Direction
+Adding Different Types of Features
+Conclusions
+References and Further Resources
+Python Scripts
+Linear Regression Backtesting Class
+Classification Algorithm Backtesting Class
+
+124
+125
+127
+129
+132
+134
+135
+137
+139
+139
+141
+146
+150
+153
+154
+156
+162
+166
+166
+167
+167
+170
+
+6. Building Classes for Event-Based Backtesting. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 175
+Backtesting Base Class
+Long-Only Backtesting Class
+Long-Short Backtesting Class
+Conclusions
+References and Further Resources
+Python Scripts
+Backtesting Base Class
+Long-Only Backtesting Class
+Long-Short Backtesting Class
+
+177
+182
+185
+190
+190
+191
+191
+194
+197
+
+7. Working with Real-Time Data and Sockets. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 201
+Running a Simple Tick Data Server
+Connecting a Simple Tick Data Client
+
+203
+206
+
+Table of Contents
+
+|
+
+v
+
+Signal Generation in Real Time
+Visualizing Streaming Data with Plotly
+The Basics
+Three Real-Time Streams
+Three Sub-Plots for Three Streams
+Streaming Data as Bars
+Conclusions
+References and Further Resources
+Python Scripts
+Sample Tick Data Server
+Tick Data Client
+Momentum Online Algorithm
+Sample Data Server for Bar Plot
+
+208
+211
+211
+212
+214
+215
+217
+218
+218
+218
+219
+219
+220
+
+8. CFD Trading with Oanda. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 223
+Setting Up an Account
+The Oanda API
+Retrieving Historical Data
+Looking Up Instruments Available for Trading
+Backtesting a Momentum Strategy on Minute Bars
+Factoring In Leverage and Margin
+Working with Streaming Data
+Placing Market Orders
+Implementing Trading Strategies in Real Time
+Retrieving Account Information
+Conclusions
+References and Further Resources
+Python Script
+
+227
+229
+230
+230
+231
+234
+236
+237
+239
+244
+246
+247
+247
+
+9. FX Trading with FXCM. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 249
+Getting Started
+Retrieving Data
+Retrieving Tick Data
+Retrieving Candles Data
+Working with the API
+Retrieving Historical Data
+Retrieving Streaming Data
+Placing Orders
+Account Information
+Conclusions
+References and Further Resources
+
+vi
+
+| Table of Contents
+
+251
+251
+252
+254
+256
+257
+259
+260
+262
+263
+264
+
+10. Automating Trading Operations. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 265
+Capital Management
+Kelly Criterion in Binomial Setting
+Kelly Criterion for Stocks and Indices
+ML-Based Trading Strategy
+Vectorized Backtesting
+Optimal Leverage
+Risk Analysis
+Persisting the Model Object
+Online Algorithm
+Infrastructure and Deployment
+Logging and Monitoring
+Visual Step-by-Step Overview
+Configuring Oanda Account
+Setting Up the Hardware
+Setting Up the Python Environment
+Uploading the Code
+Running the Code
+Real-Time Monitoring
+Conclusions
+References and Further Resources
+Python Script
+Automated Trading Strategy
+Strategy Monitoring
+
+266
+266
+272
+277
+278
+285
+287
+290
+291
+296
+297
+299
+299
+300
+301
+302
+302
+304
+304
+305
+305
+305
+308
+
+Appendix. Python, NumPy, matplotlib, pandas. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 309
+Index. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 351
+
+Table of Contents
+
+|
+
+vii
+
+Preface
+
+Dataism says that the universe consists of data flows, and the value of any phenom‐
+enon or entity is determined by its contribution to data processing….Dataism thereby
+collapses the barrier between animals [humans] and machines, and expects electronic
+algorithms to eventually decipher and outperform biochemical algorithms.1
+—Yuval Noah Harari
+
+Finding the right algorithm to automatically and successfully trade in financial mar‐
+kets is the holy grail in finance. Not too long ago, algorithmic trading was only avail‐
+able and possible for institutional players with deep pockets and lots of assets under
+management. Recent developments in the areas of open source, open data, cloud
+compute, and cloud storage, as well as online trading platforms, have leveled the play‐
+ing field for smaller institutions and individual traders, making it possible to get
+started in this fascinating discipline while equipped only with a typical notebook or
+desktop computer and a reliable internet connection.
+Nowadays, Python and its ecosystem of powerful packages is the technology platform
+of choice for algorithmic trading. Among other things, Python allows you to do
+efficient data analytics (with pandas, for example), to apply machine learning to stock
+market prediction (with scikit-learn, for example), or even to make use of Google’s
+deep learning technology with TensorFlow.
+This is a book about Python for algorithmic trading, primarily in the context of alpha
+generating strategies (see Chapter 1). Such a book at the intersection of two vast and
+exciting fields can hardly cover all topics of relevance. However, it can cover a range
+of important meta topics in depth.
+
+1 Harari, Yuval Noah. 2015. Homo Deus: A Brief History of Tomorrow. London: Harvill Secker.
+
+ix
+
+These topics include:
+Financial data
+Financial data is at the core of every algorithmic trading project. Python and
+packages like NumPy and pandas do a great job of handling and working with
+structured financial data of any kind (end-of-day, intraday, high frequency).
+Backtesting
+There should be no automated algorithmic trading without a rigorous testing of
+the trading strategy to be deployed. The book covers, among other things, trad‐
+ing strategies based on simple moving averages, momentum, mean-reversion,
+and machine/deep-learning based prediction.
+Real-time data
+Algorithmic trading requires dealing with real-time data, online algorithms
+based on it, and visualization in real time. The book provides an introduction to
+socket programming with ZeroMQ and streaming visualization.
+Online platforms
+No trading can take place without a trading platform. The book covers two pop‐
+ular electronic trading platforms: Oanda and FXCM.
+Automation
+The beauty, as well as some major challenges, in algorithmic trading results from
+the automation of the trading operation. The book shows how to deploy Python
+in the cloud and how to set up an environment appropriate for automated
+algorithmic trading.
+The book offers a unique learning experience with the following features and
+benefits:
+Coverage of relevant topics
+This is the only book covering such a breadth and depth with regard to relevant
+topics in Python for algorithmic trading (see the following).
+Self-contained code base
+The book is accompanied by a Git repository with all codes in a self-contained,
+executable form. The repository is available on the Quant Platform.
+Real trading as the goal
+The coverage of two different online trading platforms puts the reader in the
+position to start both paper and live trading efficiently. To this end, the book
+equips the reader with relevant, practical, and valuable background knowledge.
+Do-it-yourself and self-paced approach
+Since the material and the code are self-contained and only rely on standard
+Python packages, the reader has full knowledge of and full control over what is
+x
+
+|
+
+Preface
+
+going on, how to use the code examples, how to change them, and so on. There is
+no need to rely on third-party platforms, for instance, to do the backtesting or to
+connect to the trading platforms. With this book, the reader can do all this on
+their own at a convenient pace and has every single line of code to do so.
+User forum
+Although the reader should be able to follow along seamlessly, the author and
+The Python Quants are there to help. The reader can post questions and com‐
+ments in the user forum on the Quant Platform at any time (accounts are free).
+Online/video training (paid subscription)
+The Python Quants offer comprehensive online training programs that make use
+of the contents presented in the book and that add additional content, covering
+important topics such as financial data science, artificial intelligence in finance,
+Python for Excel and databases, and additional Python tools and skills.
+
+Contents and Structure
+Here’s a quick overview of the topics and contents presented in each chapter.
+Chapter 1, Python and Algorithmic Trading
+The first chapter is an introduction to the topic of algorithmic trading—that is,
+the automated trading of financial instruments based on computer algorithms. It
+discusses fundamental notions in this context and also addresses, among other
+things, what the expected prerequisites for reading the book are.
+Chapter 2, Python Infrastructure
+This chapter lays the technical foundations for all subsequent chapters in that it
+shows how to set up a proper Python environment. This chapter mainly uses
+conda as a package and environment manager. It illustrates Python deployment
+via Docker containers and in the cloud.
+Chapter 3, Working with Financial Data
+Financial time series data is central to every algorithmic trading project. This
+chapter shows you how to retrieve financial data from different public data and
+proprietary data sources. It also demonstrates how to store financial time series
+data efficiently with Python.
+Chapter 4, Mastering Vectorized Backtesting
+Vectorization is a powerful approach in numerical computation in general and
+for financial analytics in particular. This chapter introduces vectorization with
+NumPy and pandas and applies that approach to the backtesting of SMA-based,
+momentum, and mean-reversion strategies.
+
+Preface
+
+|
+
+xi
+
+Chapter 5, Predicting Market Movements with Machine Learning
+This chapter is dedicated to generating market predictions by the use of machine
+learning and deep learning approaches. By mainly relying on past return obser‐
+vations as features, approaches are presented for predicting tomorrow’s market
+direction by using such Python packages as Keras in combination with Tensor
+Flow and scikit-learn.
+Chapter 6, Building Classes for Event-Based Backtesting
+While vectorized backtesting has advantages when it comes to conciseness of
+code and performance, it’s limited with regard to the representation of certain
+market features of trading strategies. On the other hand, event-based backtesting,
+technically implemented by the use of object oriented programming, allows for a
+rather granular and more realistic modeling of such features. This chapter
+presents and explains in detail a base class as well as two classes for the backtest‐
+ing of long-only and long-short trading strategies.
+Chapter 7, Working with Real-Time Data and Sockets
+Needing to cope with real-time or streaming data is a reality even for the ambi‐
+tious individual algorithmic trader. The tool of choice is socket programming, for
+which this chapter introduces ZeroMQ as a lightweight and scalable technology.
+The chapter also illustrates how to make use of Plotly to create nice looking,
+interactive streaming plots.
+Chapter 8, CFD Trading with Oanda
+Oanda is a foreign exchange (forex, FX) and Contracts for Difference (CFD)
+trading platform offering a broad set of tradable instruments, such as those based
+on foreign exchange pairs, stock indices, commodities, or rates instruments
+(benchmark bonds). This chapter provides guidance on how to implement auto‐
+mated algorithmic trading strategies with Oanda, making use of the Python
+wrapper package tpqoa.
+Chapter 9, FX Trading with FXCM
+FXCM is another forex and CFD trading platform that has recently released a
+modern RESTful API for algorithmic trading. Available instruments span multi‐
+ple asset classes, such as forex, stock indices, or commodities. A Python wrapper
+package that makes algorithmic trading based on Python code rather convenient
+and efficient is available (http://fxcmpy.tpq.io).
+Chapter 10, Automating Trading Operations
+This chapter deals with capital management, risk analysis and management, as
+well as with typical tasks in the technical automation of algorithmic trading oper‐
+ations. It covers, for instance, the Kelly criterion for capital allocation and
+leverage in detail.
+
+xii
+
+|
+
+Preface
+
+Appendix
+The appendix provides a concise introduction to the most important Python,
+NumPy, and pandas topics in the context of the material presented in the main
+chapters. It represents a starting point from which one can add to one’s own
+Python knowledge over time.
+Figure P-1 shows the layers related to algorithmic trading that the chapters cover
+from the bottom to the top. It necessarily starts with the Python infrastructure (Chap‐
+ter 2), and adds financial data (Chapter 3), strategy, and vectorized backtesting code
+(Chapters 4 and 5). Until that point, data sets are used and manipulated as a whole.
+Event-based backtesting for the first time introduces the idea that data in the real
+world arrives incrementally (Chapter 6). It is the bridge that leads to the connecting
+code layer that covers socket communication and real-time data handling (Chap‐
+ter 7). On top of that, trading platforms and their APIs are required to be able to
+place orders (Chapters 8 and 9). Finally, important aspects of automation and deploy‐
+ment are covered (Chapter 10). In that sense, the main chapters of the book relate to
+the layers as seen in Figure P-1, which provide a natural sequence for the topics to be
+covered.
+
+Figure P-1. The layers of Python for algorithmic trading
+
+Preface
+
+|
+
+xiii
+
+Who This Book Is For
+This book is for students, academics, and practitioners alike who want to apply
+Python in the fascinating field of algorithmic trading. The book assumes that the
+reader has, at least on a fundamental level, background knowledge in both Python
+programming and in financial trading. For reference and review, the Appendix intro‐
+duces important Python, NumPy, matplotlib, and pandas topics. The following are
+good references to get a sound understanding of the Python topics important for this
+book. Most readers will benefit from having at least access to Hilpisch (2018) for ref‐
+erence. With regard to the machine and deep learning approaches applied to algorith‐
+mic trading, Hilpisch (2020) provides a wealth of background information and a
+larger number of specific examples. Background information about Python as applied
+to finance, financial data science, and artificial intelligence can be found in the
+following books:
+Hilpisch, Yves. 2018. Python for Finance: Mastering Data-Driven Finance. 2nd ed.
+Sebastopol: O’Reilly.
+⸻. 2020. Artificial Intelligence in Finance: A Python-Based Guide. Sebastopol:
+O’Reilly.
+McKinney, Wes. 2017. Python for Data Analysis: Data Wrangling with Pandas,
+NumPy, and IPython. 2nd ed. Sebastopol: O’Reilly.
+Ramalho, Luciano. 2021. Fluent Python: Clear, Concise, and Effective Programming.
+2nd ed. Sebastopol: O’Reilly.
+VanderPlas, Jake. 2016. Python Data Science Handbook: Essential Tools for Working
+with Data. Sebastopol: O’Reilly.
+Background information about algorithmic trading can be found, for instance, in
+these books:
+Chan, Ernest. 2009. Quantitative Trading: How to Build Your Own Algorithmic Trad‐
+ing Business. Hoboken et al: John Wiley & Sons.
+Chan, Ernest. 2013. Algorithmic Trading: Winning Strategies and Their Rationale.
+Hoboken et al: John Wiley & Sons.
+Kissel, Robert. 2013. The Science of Algorithmic Trading and Portfolio Management.
+Amsterdam et al: Elsevier/Academic Press.
+Narang, Rishi. 2013. Inside the Black Box: A Simple Guide to Quantitative and High
+Frequency Trading. Hoboken et al: John Wiley & Sons.
+Enjoy your journey through the algorithmic trading world with Python and get in
+touch by emailing py4at@tpq.io if you have questions or comments.
+
+xiv
+
+|
+
+Preface
+
+Conventions Used in This Book
+The following typographical conventions are used in this book:
+Italic
+Indicates new terms, URLs, email addresses, filenames, and file extensions.
+Constant width
+
+Used for program listings, as well as within paragraphs, to refer to program ele‐
+ments such as variable or function names, databases, data types, environment
+variables, statements, and keywords.
+Constant width bold
+
+Shows commands or other text that should be typed literally by the user.
+Constant width italic
+
+Shows text that should be replaced with user-supplied values or by values deter‐
+mined by context.
+This element signifies a tip or suggestion.
+
+This element signifies a general note.
+
+This element indicates a warning or caution.
+
+Using Code Examples
+You can access and execute the code that accompanies the book on the Quant Plat‐
+form at https://py4at.pqp.io, for which only a free registration is required.
+If you have a technical question or a problem using the code examples, please email
+bookquestions@oreilly.com.
+This book is here to help you get your job done. In general, if example code is offered
+with this book, you may use it in your programs and documentation. You do not
+
+Preface
+
+|
+
+xv
+
+need to contact us for permission unless you’re reproducing a significant portion of
+the code. For example, writing a program that uses several chunks of code from this
+book does not require permission. Selling or distributing examples from O’Reilly
+books does require permission. Answering a question by citing this book and quoting
+example code does not require permission. Incorporating a significant amount
+of example code from this book into your product’s documentation does require
+permission.
+We appreciate, but generally do not require, attribution. An attribution usually
+includes the title, author, publisher, and ISBN. For example, this book may be attrib‐
+uted as: “Python for Algorithmic Trading by Yves Hilpisch (O’Reilly). Copyright 2021
+Yves Hilpisch, 978-1-492-05335-4.”
+If you feel your use of code examples falls outside fair use or the permission given
+above, feel free to contact us at permissions@oreilly.com.
+
+O’Reilly Online Learning
+For more than 40 years, O’Reilly Media has provided technol‐
+ogy and business training, knowledge, and insight to help
+companies succeed.
+Our unique network of experts and innovators share their knowledge and expertise
+through books, articles, and our online learning platform. O’Reilly’s online learning
+platform gives you on-demand access to live training courses, in-depth learning
+paths, interactive coding environments, and a vast collection of text and video from
+O’Reilly and 200+ other publishers. For more information, visit http://oreilly.com.
+
+How to Contact Us
+Please address comments and questions concerning this book to the publisher:
+O’Reilly Media, Inc.
+1005 Gravenstein Highway North
+Sebastopol, CA 95472
+800-998-9938 (in the United States or Canada)
+707-829-0515 (international or local)
+707-829-0104 (fax)
+We have a web page for this book, where we list errata, examples, and any additional
+information. You can access this page at https://oreil.ly/py4at.
+
+xvi
+
+|
+
+Preface
+
+Email bookquestions@oreilly.com to comment or ask technical questions about this
+book.
+For news and information about our books and courses, visit http://oreilly.com.
+Find us on Facebook: http://facebook.com/oreilly
+Follow us on Twitter: http://twitter.com/oreillymedia
+Watch us on YouTube: http://youtube.com/oreillymedia
+
+Acknowledgments
+I want to thank the technical reviewers—Hugh Brown, McKlayne Marshall, Ramana‐
+than Ramakrishnamoorthy, and Prem Jebaseelan—who provided helpful comments
+that led to many improvements of the book’s content.
+As usual, a special thank you goes to Michael Schwed, who supports me in all techni‐
+cal matters, simple and highly complex, with his broad and in-depth technology
+know-how.
+Delegates of the Certificate Programs in Python for Computational Finance and
+Algorithmic Trading also helped improve this book. Their ongoing feedback has
+enabled me to weed out errors and mistakes and refine the code and notebooks used
+in our online training classes and now, finally, in this book.
+I would also like to thank the whole team at O’Reilly Media—especially Michelle
+Smith, Michele Cronin, Victoria DeRose, and Danny Elfanbaum—for making it all
+happen and helping me refine the book in so many ways.
+Of course, all remaining errors are mine alone.
+Furthermore, I would also like to thank the team at Refinitiv—in particular, Jason
+Ramchandani—for providing ongoing support and access to financial data. The
+major data files used throughout the book and made available to the readers were
+received in one way or another from Refinitiv’s data APIs.
+To my family with love. I dedicate this book to my father Adolf whose support for me
+and our family now spans almost five decades.
+
+Preface
+
+|
+
+xvii
+
+CHAPTER 1
+
+Python and Algorithmic Trading
+
+At Goldman [Sachs] the number of people engaged in trading shares has fallen from a peak
+of 600 in 2000 to just two today.1
+—The Economist
+
+This chapter provides background information for, and an overview of, the topics
+covered in this book. Although Python for algorithmic trading is a niche at the inter‐
+section of Python programming and finance, it is a fast-growing one that touches on
+such diverse topics as Python deployment, interactive financial analytics, machine
+and deep learning, object-oriented programming, socket communication, visualiza‐
+tion of streaming data, and trading platforms.
+For a quick refresher on important Python topics, read the Appendix first.
+
+Python for Finance
+The Python programming language originated in 1991 with the first release by Guido
+van Rossum of a version labeled 0.9.0. In 1994, version 1.0 followed. However, it took
+almost two decades for Python to establish itself as a major programming language
+and technology platform in the financial industry. Of course, there were early adopt‐
+ers, mainly hedge funds, but widespread adoption probably started only around 2011.
+One major obstacle to the adoption of Python in the financial industry has been the
+fact that the default Python version, called CPython, is an interpreted, high-level lan‐
+guage. Numerical algorithms in general and financial algorithms in particular are
+quite often implemented based on (nested) loop structures. While compiled, lowlevel languages like C or C++ are really fast at executing such loops, Python, which
+
+1 “Too Squid to Fail.” The Economist, 29. October 2016.
+
+1
+
+relies on interpretation instead of compilation, is generally quite slow at doing so. As
+a consequence, pure Python proved too slow for many real-world financial applica‐
+tions, such as option pricing or risk management.
+
+Python Versus Pseudo-Code
+Although Python was never specifically targeted towards the scientific and financial
+communities, many people from these fields nevertheless liked the beauty and con‐
+ciseness of its syntax. Not too long ago, it was generally considered good tradition to
+explain a (financial) algorithm and at the same time present some pseudo-code as an
+intermediate step towards its proper technological implementation. Many felt that,
+with Python, the pseudo-code step would not be necessary anymore. And they were
+proven mostly correct.
+Consider, for instance, the Euler discretization of the geometric Brownian motion, as
+in Equation 1-1.
+Equation 1-1. Euler discretization of geometric Brownian motion
+ST = S0 exp r − 0 . 5σ 2 T + σz T
+
+For decades, the LaTeX markup language and compiler have been the gold standard
+for authoring scientific documents containing mathematical formulae. In many ways,
+Latex syntax is similar to or already like pseudo-code when, for example, laying out
+equations, as in Equation 1-1. In this particular case, the Latex version looks like this:
+S_T = S_0 \exp((r - 0.5 \sigma^2) T + \sigma z \sqrt{T})
+
+In Python, this translates to executable code, given respective variable definitions,
+that is also really close to the financial formula as well as to the Latex representation:
+S_T = S_0 * exp((r - 0.5 * sigma ** 2) * T + sigma * z * sqrt(T))
+
+However, the speed issue remains. Such a difference equation, as a numerical approx‐
+imation of the respective stochastic differential equation, is generally used to price
+derivatives by Monte Carlo simulation or to do risk analysis and management based
+on simulation.2 These tasks in turn can require millions of simulations that need to be
+finished in due time, often in almost real-time or at least near-time. Python, as an
+interpreted high-level programming language, was never designed to be fast enough
+to tackle such computationally demanding tasks.
+
+2 For details, see Hilpisch (2018, ch. 12).
+
+2
+
+|
+
+Chapter 1: Python and Algorithmic Trading
+
+NumPy and Vectorization
+In 2006, version 1.0 of the NumPy Python package was released by Travis Oliphant.
+NumPy stands for numerical Python, suggesting that it targets scenarios that are
+numerically demanding. The base Python interpreter tries to be as general as possible
+in many areas, which often leads to quite a bit of overhead at run-time.3 NumPy, on the
+other hand, uses specialization as its major approach to avoid overhead and to be as
+good and as fast as possible in certain application scenarios.
+The major class of NumPy is the regular array object, called ndarray object for ndimensional array. It is immutable, which means that it cannot be changed in size,
+and can only accommodate a single data type, called dtype. This specialization allows
+for the implementation of concise and fast code. One central approach in this context
+is vectorization. Basically, this approach avoids looping on the Python level and dele‐
+gates the looping to specialized NumPy code, generally implemented in C and there‐
+fore rather fast.
+Consider the simulation of 1,000,000 end of period values ST according to Equation
+1-1 with pure Python. The major part of the following code is a for loop with
+1,000,000 iterations:
+In [1]: %%time
+import random
+from math import exp, sqrt
+S0 = 100
+r = 0.05
+T = 1.0
+sigma = 0.2
+values = []
+for _ in range(1000000):
+ST = S0 * exp((r - 0.5 * sigma ** 2) * T +
+sigma * random.gauss(0, 1) * sqrt(T))
+values.append(ST)
+CPU times: user 1.13 s, sys: 21.7 ms, total: 1.15 s
+Wall time: 1.15 s
+
+The initial index level.
+The constant short rate.
+
+3 For example, list objects are not only mutable, which means that they can be changed in size, but they can
+
+also contain almost any other kind of Python object, like int, float, tuple objects or list objects themselves.
+
+Python for Finance
+
+|
+
+3
+
+The time horizon in year fractions.
+The constant volatility factor.
+An empty list object to collect simulated values.
+The main for loop.
+The simulation of a single end-of-period value.
+Appends the simulated value to the list object.
+With NumPy, you can avoid looping on the Python level completely by the use of vec‐
+torization. The code is much more concise, more readable, and faster by a factor of
+about eight:
+In [2]: %%time
+import numpy as np
+S0 = 100
+r = 0.05
+T = 1.0
+sigma = 0.2
+ST = S0 * np.exp((r - 0.5 * sigma ** 2) * T +
+sigma * np.random.standard_normal(1000000) *
+np.sqrt(T))
+CPU times: user 375 ms, sys: 82.6 ms, total: 458 ms
+Wall time: 160 ms
+
+This single line of NumPy code simulates all the values and stores them in an
+
+ndarray object.
+
+Vectorization is a powerful concept for writing concise, easy-toread, and easy-to-maintain code in finance and algorithmic trad‐
+ing. With NumPy, vectorized code does not only make code more
+concise, but it also can speed up code execution considerably (by a
+factor of about eight in the Monte Carlo simulation, for example).
+
+It’s safe to say that NumPy has significantly contributed to the success of Python in sci‐
+ence and finance. Many other popular Python packages from the so-called scientific
+Python stack build on NumPy as an efficient, performing data structure to store and
+handle numerical data. In fact, NumPy is an outgrowth of the SciPy package project,
+which provides a wealth of functionality frequently needed in science. The SciPy
+project recognized the need for a more powerful numerical data structure and
+
+4
+
+|
+
+Chapter 1: Python and Algorithmic Trading
+
+consolidated older projects like Numeric and NumArray in this area into a new, unify‐
+ing one in the form of NumPy.
+In algorithmic trading, a Monte Carlo simulation might not be the most important
+use case for a programming language. However, if you enter the algorithmic trading
+space, the management of larger, or even big, financial time series data sets is a very
+important use case. Just think of the backtesting of (intraday) trading strategies or the
+processing of tick data streams during trading hours. This is where the pandas data
+analysis package comes into play.
+
+pandas and the DataFrame Class
+Development of pandas began in 2008 by Wes McKinney, who back then was work‐
+ing at AQR Capital Management, a big hedge fund operating out of Greenwich, Con‐
+necticut. As with for any other hedge fund, working with time series data is of
+paramount importance for AQR Capital Management, but back then Python did not
+provide any kind of appealing support for this type of data. Wes’s idea was to create a
+package that mimics the capabilities of the R statistical language (http://r-project.org)
+in this area. This is reflected, for example, in naming the major class DataFrame,
+whose counterpart in R is called data.frame. Not being considered close enough to
+the core business of money management, AQR Capital Management open sourced
+the pandas project in 2009, which marks the beginning of a major success story in
+open source–based data and financial analytics.
+Partly due to pandas, Python has become a major force in data and financial analyt‐
+ics. Many people who adopt Python, coming from diverse other languages, cite
+pandas as a major reason for their decision. In combination with open data sources
+like Quandl, pandas even allows students to do sophisticated financial analytics with
+the lowest barriers of entry ever: a regular notebook computer with an internet con‐
+nection suffices.
+Assume an algorithmic trader is interested in trading Bitcoin, the cryptocurrency
+with the largest market capitalization. A first step might be to retrieve data about the
+historical exchange rate in USD. Using Quandl data and pandas, such a task is accom‐
+plished in less than a minute. Figure 1-1 shows the plot that results from the follow‐
+ing Python code, which is (omitting some plotting style related parameterizations)
+only four lines. Although pandas is not explicitly imported, the Quandl Python wrap‐
+per package by default returns a DataFrame object that is then used to add a simple
+moving average (SMA) of 100 days, as well as to visualize the raw data alongside
+the SMA:
+In [3]: %matplotlib inline
+from pylab import mpl, plt
+plt.style.use('seaborn')
+mpl.rcParams['savefig.dpi'] = 300
+
+Python for Finance
+
+|
+
+5
+
+mpl.rcParams['font.family'] = 'serif'
+In [4]: import configparser
+c = configparser.ConfigParser()
+c.read('../pyalgo.cfg')
+Out[4]: ['../pyalgo.cfg']
+In [5]: import quandl as q
+q.ApiConfig.api_key = c['quandl']['api_key']
+d = q.get('BCHAIN/MKPRU')
+d['SMA'] = d['Value'].rolling(100).mean()
+d.loc['2013-1-1':].plot(title='BTC/USD exchange rate',
+figsize=(10, 6));
+
+Imports and configures the plotting package.
+Imports the configparser module and reads credentials.
+Imports the Quandl Python wrapper package and provides the API key.
+Retrieves daily data for the Bitcoin exchange rate and returns a pandas Data
+
+Frame object with a single column.
+
+Calculates the SMA for 100 days in vectorized fashion.
+Selects data from the 1st of January 2013 on and plots it.
+Obviously, NumPy and pandas measurably contribute to the success of Python in
+finance. However, the Python ecosystem has much more to offer in the form of addi‐
+tional Python packages that solve rather fundamental problems and sometimes speci‐
+alized ones. This book will make use of packages for data retrieval and storage (for
+example, PyTables, TsTables, SQLite) and for machine and deep learning (for exam‐
+ple, scikit-learn, TensorFlow), to name just two categories. Along the way, we will
+also implement classes and modules that will make any algorithmic trading project
+more efficient. However, the main packages used throughout will be NumPy and
+pandas.
+
+6
+
+|
+
+Chapter 1: Python and Algorithmic Trading
+
+Figure 1-1. Historical Bitcoin exchange rate in USD from the beginning of 2013 until
+mid-2020
+While NumPy provides the basic data structure to store numerical
+data and work with it, pandas brings powerful time series manage‐
+ment capabilities to the table. It also does a great job of wrapping
+functionality from other packages into an easy-to-use API. The Bit‐
+coin example just described shows that a single method call on a
+DataFrame object is enough to generate a plot with two financial
+time series visualized. Like NumPy, pandas allows for rather concise,
+vectorized code that is also generally executed quite fast due to
+heavy use of compiled code under the hood.
+
+Algorithmic Trading
+The term algorithmic trading is neither uniquely nor universally defined. On a rather
+basic level, it refers to the trading of financial instruments based on some formal
+algorithm. An algorithm is a set of operations (mathematical, technical) to be conduc‐
+ted in a certain sequence to achieve a certain goal. For example, there are mathemati‐
+cal algorithms to solve a Rubik’s Cube.4 Such an algorithm can solve the problem at
+hand via a step-by-step procedure, often perfectly. Another example is algorithms for
+
+4 See The Mathematics of the Rubik’s Cube or Algorithms for Solving Rubik’s Cube.
+
+Algorithmic Trading
+
+|
+
+7
+
+finding the root(s) of an equation if it (they) exist(s) at all. In that sense, the objective
+of a mathematical algorithm is often well specified and an optimal solution is often
+expected.
+But what about the objective of financial trading algorithms? This question is not that
+easy to answer in general. It might help to step back for a moment and consider gen‐
+eral motives for trading. In Dorn et al. (2008) write:
+Trading in financial markets is an important economic activity. Trades are necessary to
+get into and out of the market, to put unneeded cash into the market, and to convert
+back into cash when the money is wanted. They are also needed to move money
+around within the market, to exchange one asset for another, to manage risk, and to
+exploit information about future price movements.
+
+The view expressed here is more technical than economic in nature, focusing mainly
+on the process itself and only partly on why people initiate trades in the first place.
+For our purposes, a nonexhaustive list of financial trading motives of people and
+financial institutions managing money of their own or for others includes the
+following:
+Beta trading
+Earning market risk premia by investing in, for instance, exchange traded funds
+(ETFs) that replicate the performance of the S&P 500.
+Alpha generation
+Earning risk premia independent of the market by, for example, selling short
+stocks listed in the S&P 500 or ETFs on the S&P 500.
+Static hedging
+Hedging against market risks by buying, for example, out-of-the-money put
+options on the S&P 500.
+Dynamic hedging
+Hedging against market risks affecting options on the S&P 500 by, for example,
+dynamically trading futures on the S&P 500 and appropriate cash, money mar‐
+ket, or rate instruments.
+Asset-liability management
+Trading S&P 500 stocks and ETFs to be able to cover liabilities resulting from, for
+example, writing life insurance policies.
+Market making
+Providing, for example, liquidity to options on the S&P 500 by buying and selling
+options at different bid and ask prices.
+All these types of trades can be implemented by a discretionary approach,
+with human traders making decisions mainly on their own, as well as based on algo‐
+rithms supporting the human trader or even replacing them completely in the
+8
+
+|
+
+Chapter 1: Python and Algorithmic Trading
+
+decision-making process. In this context, computerization of financial trading of
+course plays an important role. While in the beginning of financial trading, floor
+trading with a large group of people shouting at each other (“open outcry”) was the
+only way of executing trades, computerization and the advent of the internet and web
+technologies have revolutionized trading in the financial industry. The quotation at
+the beginning of this chapter illustrates this impressively in terms of the number of
+people actively engaged in trading shares at Goldman Sachs in 2000 and in 2016. It is
+a trend that was foreseen 25 years ago, as Solomon and Corso (1991) point out:
+Computers have revolutionized the trading of securities and the stock market is cur‐
+rently in the midst of a dynamic transformation. It is clear that the market of the future
+will not resemble the markets of the past.
+Technology has made it possible for information regarding stock prices to be sent all
+over the world in seconds. Presently, computers route orders and execute small trades
+directly from the brokerage firm’s terminal to the exchange. Computers now link
+together various stock exchanges, a practice which is helping to create a single global
+market for the trading of securities. The continuing improvements in technology will
+make it possible to execute trades globally by electronic trading systems.
+
+Interestingly, one of the oldest and most widely used algorithms is found in dynamic
+hedging of options. Already with the publication of the seminal papers about the
+pricing of European options by Black and Scholes (1973) and Merton (1973), the
+algorithm, called delta hedging, was made available long before computerized and
+electronic trading even started. Delta hedging as a trading algorithm shows how to
+hedge away all market risks in a simplified, perfect, continuous model world. In the
+real world, with transaction costs, discrete trading, imperfectly liquid markets, and
+other frictions (“imperfections”), the algorithm has proven, somewhat surprisingly
+maybe, its usefulness and robustness, as well. It might not allow one to perfectly
+hedge away market risks affecting options, but it is useful in getting close to the ideal
+and is therefore still used on a large scale in the financial industry.5
+This book focuses on algorithmic trading in the context of alpha generating strategies.
+Although there are more sophisticated definitions for alpha, for the purposes of this
+book, alpha is seen as the difference between a trading strategy’s return over some
+period of time and the return of the benchmark (single stock, index, cryptocurrency,
+etc.). For example, if the S&P 500 returns 10% in 2018 and an algorithmic strategy
+returns 12%, then alpha is +2% points. If the strategy returns 7%, then alpha is -3%
+points. In general, such numbers are not adjusted for risk, and other risk characteris‐
+tics, such as maximal drawdown (period), are usually considered to be of second
+order importance, if at all.
+
+5 See Hilpisch (2015) for a detailed analysis of delta hedging strategies for European and American options
+
+using Python.
+
+Algorithmic Trading
+
+|
+
+9
+
+This book focuses on alpha-generating strategies, or strategies that
+try to generate positive returns (above a benchmark) independent
+of the market’s performance. Alpha is defined in this book (in the
+simplest way) as the excess return of a strategy over the benchmark
+financial instrument’s performance.
+
+There are other areas where trading-related algorithms play an important role. One is
+the high frequency trading (HFT) space, where speed is typically the discipline in
+which players compete.6 The motives for HFT are diverse, but market making and
+alpha generation probably play a prominent role. Another one is trade execution,
+where algorithms are deployed to optimally execute certain nonstandard trades.
+Motives in this area might include the execution (at best possible prices) of large
+orders or the execution of an order with as little market and price impact as possible.
+A more subtle motive might be to disguise an order by executing it on a number of
+different exchanges.
+An important question remains to be addressed: is there any advantage to using algo‐
+rithms for trading instead of human research, experience, and discretion? This ques‐
+tion can hardly be answered in any generality. For sure, there are human traders and
+portfolio managers who have earned, on average, more than their benchmark for
+investors over longer periods of time. The paramount example in this regard is War‐
+ren Buffett. On the other hand, statistical analyses show that the majority of active
+portfolio managers rarely beat relevant benchmarks consistently. Referring to the year
+2015, Adam Shell writes:
+Last year, for example, when the Standard & Poor’s 500-stock index posted a paltry
+total return of 1.4% with dividends included, 66% of “actively managed” largecompany stock funds posted smaller returns than the index…The longer-term outlook
+is just as gloomy, with 84% of large-cap funds generating lower returns than the S&P
+500 in the latest five year period and 82% falling shy in the past 10 years, the study
+found.7
+
+In an empirical study published in December 2016, Harvey et al. write:
+We analyze and contrast the performance of discretionary and systematic hedge funds.
+Systematic funds use strategies that are rules‐based, with little or no daily intervention
+by humans….We find that, for the period 1996‐2014, systematic equity managers
+underperform their discretionary counterparts in terms of unadjusted (raw) returns,
+but that after adjusting for exposures to well‐known risk factors, the risk‐adjusted per‐
+formance is similar. In the case of macro, systematic funds outperform discretionary
+funds, both on an unadjusted and risk‐adjusted basis.
+
+6 See the book by Lewis (2015) for a non-technical introduction to HFT.
+7 Source: “66% of Fund Managers Can’t Match S&P Results.” USA Today, March 14, 2016.
+
+10
+
+|
+
+Chapter 1: Python and Algorithmic Trading
+
+Table 1-0 reproduces the major quantitative findings of the study by Harvey et al.
+(2016).8 In the table, factors include traditional ones (equity, bonds, etc.), dynamic
+ones (value, momentum, etc.), and volatility (buying at-the-money puts and calls).
+The adjusted return appraisal ratio divides alpha by the adjusted return volatility. For
+more details and background, see the original study.
+The study’s results illustrate that systematic (“algorithmic”) macro hedge funds per‐
+form best as a category, both in unadjusted and risk-adjusted terms. They generate an
+annualized alpha of 4.85% points over the period studied. These are hedge funds
+implementing strategies that are typically global, are cross-asset, and often involve
+political and macroeconomic elements. Systematic equity hedge funds only beat their
+discretionary counterparts on the basis of the adjusted return appraisal ratio (0.35
+versus 0.25).
+
+Return average
+
+Systematic macro Discretionary macro Systematic equity Discretionary equity
+5.01%
+2.86%
+2.88%
+4.09%
+0.15%
+
+1.28%
+
+1.77%
+
+2.86%
+
+Adj. return average (alpha) 4.85%
+0.93%
+Adj. return volatility
+
+1.57%
+
+1.11%
+
+1.22%
+
+5.10%
+
+3.18%
+
+4.79%
+
+0.44
+
+0.31
+
+0.35
+
+0.25
+
+Return attributed to
+factors
+
+Adj. return appraisal ratio
+
+Compared to the S&P 500, hedge fund performance overall was quite meager for the
+year 2017. While the S&P 500 index returned 21.8%, hedge funds only returned 8.5%
+to investors (see this article in Investopedia). This illustrates how hard it is, even with
+multimillion dollar budgets for research and technology, to generate alpha.
+
+Python for Algorithmic Trading
+Python is used in many corners of the financial industry but has become particularly
+popular in the algorithmic trading space. There are a few good reasons for this:
+Data analytics capabilities
+A major requirement for every algorithmic trading project is the ability to man‐
+age and process financial data efficiently. Python, in combination with packages
+like NumPy and pandas, makes life easier in this regard for every algorithmic
+trader than most other programming languages do.
+
+8 Annualized performance (above the short-term interest rate) and risk measures for hedge fund categories
+
+comprising a total of 9,000 hedge funds over the period from June 1996 to December 2014.
+
+Python for Algorithmic Trading
+
+|
+
+11
+
+Handling of modern APIs
+Modern online trading platforms like the ones from FXCM and Oanda offer
+RESTful application programming interfaces (APIs) and socket (streaming) APIs
+to access historical and live data. Python is in general well suited to efficiently
+interact with such APIs.
+Dedicated packages
+In addition to the standard data analytics packages, there are multiple packages
+available that are dedicated to the algorithmic trading space, such as PyAlgoTrade
+and Zipline for the backtesting of trading strategies and Pyfolio for performing
+portfolio and risk analysis.
+Vendor sponsored packages
+More and more vendors in the space release open source Python packages to
+facilitate access to their offerings. Among them are online trading platforms like
+Oanda, as well as the leading data providers like Bloomberg and Refinitiv.
+Dedicated platforms
+Quantopian, for example, offers a standardized backtesting environment as a
+Web-based platform where the language of choice is Python and where people
+can exchange ideas with like-minded others via different social network features.
+From its founding until 2020, Quantopian has attracted more than 300,000 users.
+Buy- and sell-side adoption
+More and more institutional players have adopted Python to streamline develop‐
+ment efforts in their trading departments. This, in turn, requires more and more
+staff proficient in Python, which makes learning Python a worthwhile
+investment.
+Education, training, and books
+Prerequisites for the widespread adoption of a technology or programming lan‐
+guage are academic and professional education and training programs in combi‐
+nation with specialized books and other resources. The Python ecosystem has
+seen a tremendous growth in such offerings recently, educating and training
+more and more people in the use of Python for finance. This can be expected to
+reinforce the trend of Python adoption in the algorithmic trading space.
+In summary, it is rather safe to say that Python plays an important role in algorithmic
+trading already and seems to have strong momentum to become even more impor‐
+tant in the future. It is therefore a good choice for anyone trying to enter the space, be
+it as an ambitious “retail” trader or as a professional employed by a leading financial
+institution engaged in systematic trading.
+
+12
+
+|
+
+Chapter 1: Python and Algorithmic Trading
+
+Focus and Prerequisites
+The focus of this book is on Python as a programming language for algorithmic trad‐
+ing. The book assumes that the reader already has some experience with Python and
+popular Python packages used for data analytics. Good introductory books are, for
+example, Hilpisch (2018), McKinney (2017), and VanderPlas (2016), which all can be
+consulted to build a solid foundation in Python for data analysis and finance. The
+reader is also expected to have some experience with typical tools used for interactive
+analytics with Python, such as IPython, to which VanderPlas (2016) also provides an
+introduction.
+This book presents and explains Python code that is applied to the topics at hand, like
+backtesting trading strategies or working with streaming data. It cannot provide a
+thorough introduction to all packages used in different places. It tries, however, to
+highlight those capabilities of the packages that are central to the exposition (such as
+vectorization with NumPy).
+The book also cannot provide a thorough introduction and overview of all financial
+and operational aspects relevant for algorithmic trading. The approach instead focu‐
+ses on the use of Python to build the necessary infrastructure for automated algorith‐
+mic trading systems. Of course, the majority of examples used are taken from the
+algorithmic trading space. However, when dealing with, say, momentum or meanreversion strategies, they are more or less simply used without providing (statistical)
+verification or an in-depth discussion of their intricacies. Whenever it seems appro‐
+priate, references are given that point the reader to sources that address issues left
+open during the exposition.
+All in all, this book is written for readers who have some experience with both
+Python and (algorithmic) trading. For such a reader, the book is a practical guide to
+the creation of automated trading systems using Python and additional packages.
+This book uses a number of Python programming approaches (for
+example, object oriented programming) and packages (for exam‐
+ple, scikit-learn) that cannot be explained in detail. The focus is
+on applying these approaches and packages to different steps in an
+algorithmic trading process. It is therefore recommended that
+those who do not yet have enough Python (for finance) experience
+additionally consult more introductory Python texts.
+
+Trading Strategies
+Throughout this book, four different algorithmic trading strategies are used as exam‐
+ples. They are introduced briefly in the following sections and in some more detail
+in Chapter 4. All these trading strategies can be classified as mainly alpha seeking
+Focus and Prerequisites
+
+|
+
+13
+
+strategies, since their main objective is to generate positive, above-market returns
+independent of the market direction. Canonical examples throughout the book, when
+it comes to financial instruments traded, are a stock index, a single stock, or a crypto‐
+currency (denominated in a fiat currency). The book does not cover strategies involv‐
+ing multiple financial instruments at the same time (pair trading strategies, strategies
+based on baskets, etc.). It also covers only strategies whose trading signals are derived
+from structured, financial time series data and not, for instance, from unstructured
+data sources like news or social media feeds. This keeps the discussions and the
+Python implementations concise and easier to understand, in line with the approach
+(discussed earlier) of focusing on Python for algorithmic trading.9
+The remainder of this chapter gives a quick overview of the four trading strategies
+used in this book.
+
+Simple Moving Averages
+The first type of trading strategy relies on simple moving averages (SMAs) to gener‐
+ate trading signals and market positionings. These trading strategies have been popu‐
+larized by so-called technical analysts or chartists. The basic idea is that a shorterterm SMA being higher in value than a longer term SMA signals a long market
+position and the opposite scenario signals a neutral or short market position.
+
+Momentum
+The basic idea behind momentum strategies is that a financial instrument is assumed
+to perform in accordance with its recent performance for some additional time. For
+example, when a stock index has seen a negative return on average over the last five
+days, it is assumed that its performance will be negative tomorrow, as well.
+
+Mean Reversion
+In mean-reversion strategies, a financial instrument is assumed to revert to some
+mean or trend level if it is currently far enough away from such a level. For example,
+assume that a stock trades 10 USD under its 200 days SMA level of 100. It is then
+expected that the stock price will return to its SMA level sometime soon.
+
+9 See the book by Kissel (2013) for an overview of topics related to algorithmic trading, the book by Chan
+
+(2013) for an in-depth discussion of momentum and mean-reversion strategies, or the book by Narang (2013)
+for a coverage of quantitative and HFT trading in general.
+
+14
+
+|
+
+Chapter 1: Python and Algorithmic Trading
+
+Machine and Deep Learning
+With machine and deep learning algorithms, one generally takes a more black box
+approach to predicting market movements. For simplicity and reproducibility, the
+examples in this book mainly rely on historical return observations as features to
+train machine and deep learning algorithms to predict stock market movements.
+This book does not introduce algorithmic trading in a systematic
+fashion. Since the focus lies on applying Python in this fascinating
+field, readers not familiar with algorithmic trading should consult
+dedicated resources on the topic, some of which are cited in this
+chapter and the chapters that follow. But be aware of the fact that
+the algorithmic trading world in general is secretive and that
+almost everyone who is successful is naturally reluctant to share
+their secrets in order to protect their sources of success (that is,
+their alpha).
+
+Conclusions
+Python is already a force in finance in general and is on its way to becoming a major
+force in algorithmic trading. There are a number of good reasons to use Python for
+algorithmic trading, among them the powerful ecosystem of packages that allows for
+efficient data analysis or the handling of modern APIs. There are also a number of
+good reasons to learn Python for algorithmic trading, chief among them the fact that
+some of the biggest buy- and sell-side institutions make heavy use of Python in their
+trading operations and constantly look for seasoned Python professionals.
+This book focuses on applying Python to the different disciplines in algorithmic trad‐
+ing, like backtesting trading strategies or interacting with online trading platforms. It
+cannot replace a thorough introduction to Python itself nor to trading in general.
+However, it systematically combines these two fascinating worlds to provide a valua‐
+ble source for the generation of alpha in today’s competitive financial and cryptocur‐
+rency markets.
+
+References and Further Resources
+Books and papers cited in this chapter:
+Black, Fischer, and Myron Scholes. 1973. “The Pricing of Options and Corporate Lia‐
+bilities.” Journal of Political Economy 81 (3): 638-659.
+Chan, Ernest. 2013. Algorithmic Trading: Winning Strategies and Their Rationale.
+Hoboken et al: John Wiley & Sons.
+
+Conclusions
+
+|
+
+15
+
+Dorn, Anne, Daniel Dorn, and Paul Sengmueller. 2008. “Why Do People Trade?”
+Journal of Applied Finance (Fall/Winter): 37-50.
+Harvey, Campbell, Sandy Rattray, Andrew Sinclair, and Otto Van Hemert. 2016.
+“Man vs. Machine: Comparing Discretionary and Systematic Hedge Fund Perfor‐
+mance.” The Journal of Portfolio Management White Paper, Man Group.
+Hilpisch, Yves. 2015. Derivatives Analytics with Python: Data Analysis, Models, Simu‐
+lation, Calibration and Hedging. Wiley Finance. Resources under http://
+dawp.tpq.io.
+⸻. 2018. Python for Finance: Mastering Data-Driven Finance. 2nd ed. Sebasto‐
+pol: O’Reilly. Resources under https://py4fi.pqp.io.
+⸻. 2020. Artificial Intelligence in Finance: A Python-Based Guide. Sebastopol:
+O’Reilly. Resources under https://aiif.pqp.io.
+Kissel, Robert. 2013. The Science of Algorithmic Trading and Portfolio Management.
+Amsterdam et al: Elsevier/Academic Press.
+Lewis, Michael. 2015. Flash Boys: Cracking the Money Code. New York, London: W.W.
+Norton & Company.
+McKinney, Wes. 2017. Python for Data Analysis: Data Wrangling with Pandas,
+NumPy, and IPython. 2nd ed. Sebastopol: O’Reilly.
+Merton, Robert. 1973. “Theory of Rational Option Pricing.” Bell Journal of Economics
+and Management Science 4: 141-183.
+Narang, Rishi. 2013. Inside the Black Box: A Simple Guide to Quantitative and High
+Frequency Trading. Hoboken et al: John Wiley & Sons.
+Solomon, Lewis, and Louise Corso. 1991. “The Impact of Technology on the Trading
+of Securities: The Emerging Global Market and the Implications for Regulation.”
+The John Marshall Law Review 24 (2): 299-338.
+VanderPlas, Jake. 2016. Python Data Science Handbook: Essential Tools for Working
+with Data. Sebastopol: O’Reilly.
+
+16
+
+|
+
+Chapter 1: Python and Algorithmic Trading
+
+CHAPTER 2
+
+Python Infrastructure
+
+In building a house, there is the problem of the selection of wood.
+It is essential that the carpenter’s aim be to carry equipment that will cut well and, when he
+has time, to sharpen that equipment.
+—Miyamoto Musashi (The Book of Five Rings)
+
+For someone new to Python, Python deployment might seem all but straightforward.
+The same holds true for the wealth of libraries and packages that can be installed
+optionally. First of all, there is not only one Python. Python comes in many different
+flavors, like CPython, Jython, IronPython, or PyPy. Then there is still the divide
+between Python 2.7 and the 3.x world. This chapter focuses on CPython, the most
+popular version of the Python programming language, and on version 3.8.
+Even when focusing on CPython 3.8 (henceforth just “Python”), deployment is made
+difficult due to a number of reasons:
+• The interpreter (a standard CPython installation) only comes with the so-called
+standard library (e.g. covering typical mathematical functions).
+• Optional Python packages need to be installed separately, and there are hundreds
+of them.
+• Compiling (“building”) such non-standard packages on your own can be tricky
+due to dependencies and operating system–specific requirements.
+• Taking care of such dependencies and of version consistency over time (mainte‐
+nance) is often tedious and time consuming.
+• Updates and upgrades for certain packages might cause the need for recompiling
+a multitude of other packages.
+
+17
+
+• Changing or replacing one package might cause trouble in (many) other places.
+• Migrating from one Python version to another one at some later point might
+amplify all the preceding issues.
+Fortunately, there are tools and strategies available that help with the Python deploy‐
+ment issue. This chapter covers the following types of technologies that help with
+Python deployment:
+Package manager
+Package managers like pip or conda help with the installing, updating, and
+removing of Python packages. They also help with version consistency of differ‐
+ent packages.
+Virtual environment manager
+A virtual environment manager like virtualenv or conda allows one to manage
+multiple Python installations in parallel (for example, to have both a Python 2.7
+and 3.8 installation on a single machine or to test the most recent development
+version of a fancy Python package without risk).1
+Container
+Docker containers represent complete file systems containing all pieces of a sys‐
+tem needed to run a certain software, such as code, runtime, or system tools. For
+example, you can run a Ubuntu 20.04 operating system with a Python 3.8 instal‐
+lation and the respective Python codes in a Docker container hosted on a
+machine running Mac OS or Windows 10. Such a containerized environment can
+then also be deployed later in the cloud without any major changes.
+Cloud instance
+Deploying Python code for financial applications generally requires high availa‐
+bility, security, and performance. These requirements can typically be met only
+by the use of professional compute and storage infrastructure that is nowadays
+available at attractive conditions in the form of fairly small to really large and
+powerful cloud instances. One benefit of a cloud instance (virtual server) com‐
+pared to a dedicated server rented longer term is that users generally get charged
+only for the hours of actual usage. Another advantage is that such cloud instances
+are available literally in a minute or two if needed, which helps with agile devel‐
+opment and scalability.
+The structure of this chapter is as follows. “Conda as a Package Manager” on page 19
+introduces conda as a package manager for Python. “Conda as a Virtual Environment
+
+1 A recent project called pipenv combines the capabilities of the package manager pip with those of the virual
+
+environment manager virtualenv. See https://github.com/pypa/pipenv.
+
+18
+
+|
+
+Chapter 2: Python Infrastructure
+
+Manager” on page 27 focuses on conda capabilities for virtual environment manage‐
+ment. “Using Docker Containers” on page 30 gives a brief overview of Docker as a
+containerization technology and focuses on the building of a Ubuntu-based container
+with Python 3.8 installation. “Using Cloud Instances” on page 36 shows how to
+deploy Python and Jupyter Lab, a powerful, browser-based tool suite for Python
+development and deployment in the cloud.
+The goal of this chapter is to have a proper Python installation with the most impor‐
+tant tools, as well as numerical, data analysis, and visualization packages, available on
+a professional infrastructure. This combination then serves as the backbone for
+implementing and deploying the Python codes in later chapters, be it interactive
+financial analytics code or code in the form of scripts and modules.
+
+Conda as a Package Manager
+Although conda can be installed alone, an efficient way of doing it is via Miniconda, a
+minimal Python distribution that includes conda as a package and virtual environ‐
+ment manager.
+
+Installing Miniconda
+You can download the different versions of Miniconda on the Miniconda page. In
+what follows, the Python 3.8 64-bit version is assumed, which is available for Linux,
+Windows, and Mac OS. The main example in this sub-section is a session in an
+Ubuntu-based Docker container, which downloads the Linux 64-bit installer via wget
+and then installs Miniconda. The code as shown should work (with maybe minor
+modifications) on any other Linux-based or Mac OS–based machine, as well:2
+$ docker run -ti -h pyalgo -p 11111:11111 ubuntu:latest /bin/bash
+root@pyalgo:/# apt-get update; apt-get upgrade -y
+...
+root@pyalgo:/# apt-get install -y gcc wget
+...
+root@pyalgo:/# cd root
+root@pyalgo:~# wget \
+> https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+> -O miniconda.sh
+...
+HTTP request sent, awaiting response... 200 OK
+Length: 93052469 (89M) [application/x-sh]
+Saving to: 'miniconda.sh'
+
+2 On Windows, you can also run the exact same commands in a Docker container (see https://oreil.ly/GndRR).
+
+Working on Windows directly requires some adjustments. See, for example, the book by Matthias and Kane
+(2018) for further details on Docker usage.
+
+Conda as a Package Manager
+
+|
+
+19
+
+miniconda.sh
+
+100%[============>]
+
+88.74M
+
+1.60MB/s
+
+in 2m 15s
+
+2020-08-25 11:01:54 (3.08 MB/s) - 'miniconda.sh' saved [93052469/93052469]
+root@pyalgo:~# bash miniconda.sh
+Welcome to Miniconda3 py38_4.8.3
+In order to continue the installation process, please review the license
+agreement.
+Please, press ENTER to continue
+>>>
+
+Simply pressing the ENTER key starts the installation process. After reviewing the
+license agreement, approve the terms by answering yes:
+...
+Last updated February 25, 2020
+Do you accept the license terms? [yes|no]
+[no] >>> yes
+Miniconda3 will now be installed into this location:
+/root/miniconda3
+- Press ENTER to confirm the location
+- Press CTRL-C to abort the installation
+- Or specify a different location below
+[/root/miniconda3] >>>
+PREFIX=/root/miniconda3
+Unpacking payload ...
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+## Package Plan ##
+environment location: /root/miniconda3
+...
+python
+pkgs/main/linux-64::python-3.8.3-hcff3b4d_0
+...
+Preparing transaction: done
+Executing transaction: done
+installation finished.
+
+After you have agreed to the licensing terms and have confirmed the install location,
+you should allow Miniconda to prepend the new Miniconda install location to the
+PATH environment variable by answering yes once again:
+Do you wish the installer to initialize Miniconda3
+by running conda init? [yes|no]
+[no] >>> yes
+
+20
+
+|
+
+Chapter 2: Python Infrastructure
+
+...
+no change
+modified
+
+/root/miniconda3/etc/profile.d/conda.csh
+/root/.bashrc
+
+==> For changes to take effect, close and re-open your current shell. <==
+If you'd prefer that conda's base environment not be activated on startup,
+set the auto_activate_base parameter to false:
+conda config --set auto_activate_base false
+Thank you for installing Miniconda3!
+root@pyalgo:~#
+
+After that, you might want to update conda since the Miniconda installer is in general
+not as regularly updated as conda itself:
+root@pyalgo:~# export PATH="/root/miniconda3/bin/:$PATH"
+root@pyalgo:~# conda update -y conda
+...
+root@pyalgo:~# echo ". /root/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc
+root@pyalgo:~# bash
+(base) root@pyalgo:~#
+
+After this rather simple installation procedure, there are now both a basic Python
+installation and conda available. The basic Python installation comes already with
+some nice batteries included, like the SQLite3 database engine. You might try out
+whether you can start Python in a new shell instance or after appending the relevant
+path to the respective environment variable (as done in the preceding example):
+(base) root@pyalgo:~# python
+Python 3.8.3 (default, May 19 2020, 18:47:26)
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print('Hello Python for Algorithmic Trading World.')
+Hello Python for Algorithmic Trading World.
+>>> exit()
+(base) root@pyalgo:~#
+
+Basic Operations with Conda
+conda can be used to efficiently handle, among other things, the installation, updat‐
+ing, and removal of Python packages. The following list provides an overview of the
+major functions:
+
+Installing Python x.x
+conda install python=x.x
+Updating Python
+conda update python
+
+Conda as a Package Manager
+
+|
+
+21
+
+Installing a package
+conda install $PACKAGE_NAME
+Updating a package
+conda update $PACKAGE_NAME
+Removing a package
+conda remove $PACKAGE_NAME
+Updating conda itself
+conda update conda
+Searching for packages
+conda search $SEARCH_TERM
+Listing installed packages
+conda list
+Given these capabilities, installing, for example, NumPy (as one of the most important
+packages of the so-called scientific stack) is a single command only. When the installa‐
+tion takes place on a machine with an Intel processor, the procedure automatically
+installs the Intel Math Kernel Library mkl, which speeds up numerical operations not
+only for NumPy on Intel machines but also for a few other scientific Python packages:3
+(base) root@pyalgo:~# conda install numpy
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+## Package Plan ##
+environment location: /root/miniconda3
+added / updated specs:
+- numpy
+
+The following packages will be downloaded:
+package
+|
+build
+---------------------------|----------------blas-1.0
+|
+mkl
+intel-openmp-2020.1
+|
+217
+mkl-2020.1
+|
+217
+mkl-service-2.3.0
+|
+py38he904b0f_0
+mkl_fft-1.1.0
+|
+py38h23d657b_0
+
+6 KB
+780 KB
+129.0 MB
+62 KB
+150 KB
+
+3 Installing the meta package nomkl, such as in conda install numpy nomkl, avoids the automatic installation
+
+and usage of mkl and related other packages.
+
+22
+
+|
+
+Chapter 2: Python Infrastructure
+
+mkl_random-1.1.1
+|
+py38h0573a6f_0
+341 KB
+numpy-1.19.1
+|
+py38hbc911f0_0
+21 KB
+numpy-base-1.19.1
+|
+py38hfa32c7d_0
+4.2 MB
+-----------------------------------------------------------Total:
+134.5 MB
+The following NEW packages will be INSTALLED:
+blas
+intel-openmp
+mkl
+mkl-service
+mkl_fft
+mkl_random
+numpy
+numpy-base
+
+pkgs/main/linux-64::blas-1.0-mkl
+pkgs/main/linux-64::intel-openmp-2020.1-217
+pkgs/main/linux-64::mkl-2020.1-217
+pkgs/main/linux-64::mkl-service-2.3.0-py38he904b0f_0
+pkgs/main/linux-64::mkl_fft-1.1.0-py38h23d657b_0
+pkgs/main/linux-64::mkl_random-1.1.1-py38h0573a6f_0
+pkgs/main/linux-64::numpy-1.19.1-py38hbc911f0_0
+pkgs/main/linux-64::numpy-base-1.19.1-py38hfa32c7d_0
+
+Proceed ([y]/n)? y
+
+Downloading and Extracting Packages
+numpy-base-1.19.1
+| 4.2 MB
+| ############################## | 100%
+blas-1.0
+| 6 KB
+| ############################## | 100%
+mkl_fft-1.1.0
+| 150 KB
+| ############################## | 100%
+mkl-service-2.3.0
+| 62 KB
+| ############################## | 100%
+numpy-1.19.1
+| 21 KB
+| ############################## | 100%
+mkl-2020.1
+| 129.0 MB | ############################## | 100%
+mkl_random-1.1.1
+| 341 KB
+| ############################## | 100%
+intel-openmp-2020.1 | 780 KB
+| ############################## | 100%
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(base) root@pyalgo:~#
+
+Conda as a Package Manager
+
+|
+
+23
+
+Multiple packages can also be installed at once. The -y flag indicates that all (poten‐
+tial) questions shall be answered with yes:
+(base) root@pyalgo:~# conda install -y ipython matplotlib pandas \
+> pytables scikit-learn scipy
+...
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+## Package Plan ##
+environment location: /root/miniconda3
+added / updated specs:
+- ipython
+- matplotlib
+- pandas
+- pytables
+- scikit-learn
+- scipy
+
+The following packages will be downloaded:
+package
+|
+build
+---------------------------|----------------backcall-0.2.0
+|
+py_0
+15 KB
+...
+zstd-1.4.5
+|
+h9ceee32_0
+619 KB
+-----------------------------------------------------------Total:
+144.9 MB
+The following NEW packages will be INSTALLED:
+backcall
+blosc
+...
+zstd
+
+pkgs/main/noarch::backcall-0.2.0-py_0
+pkgs/main/linux-64::blosc-1.20.0-hd408876_0
+pkgs/main/linux-64::zstd-1.4.5-h9ceee32_0
+
+Downloading and Extracting Packages
+glib-2.65.0
+| 2.9 MB
+| ############################## | 100%
+...
+snappy-1.1.8
+| 40 KB
+| ############################## | 100%
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(base) root@pyalgo:~#
+
+24
+
+|
+
+Chapter 2: Python Infrastructure
+
+After the resulting installation procedure, some of the most important libraries for
+financial analytics are available in addition to the standard ones:
+IPython
+An improved interactive Python shell
+matplotlib
+The standard plotting library for Python
+NumPy
+Efficient handling of numerical arrays
+pandas
+Management of tabular data, like financial time series data
+PyTables
+A Python wrapper for the HDF5 library
+scikit-learn
+A package for machine learning and related tasks
+SciPy
+A collection of scientific classes and functions
+This provides a basic tool set for data analysis in general and financial analytics in
+particular. The next example uses IPython and draws a set of pseudo-random num‐
+bers with NumPy:
+(base) root@pyalgo:~# ipython
+Python 3.8.3 (default, May 19 2020, 18:47:26)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.16.1 -- An enhanced Interactive Python. Type '?' for help.
+In [1]: import numpy as np
+In [2]: np.random.seed(100)
+In [3]: np.random.standard_normal((5, 4))
+Out[3]:
+array([[-1.74976547, 0.3426804 , 1.1530358 , -0.25243604],
+[ 0.98132079, 0.51421884, 0.22117967, -1.07004333],
+[-0.18949583, 0.25500144, -0.45802699, 0.43516349],
+[-0.58359505, 0.81684707, 0.67272081, -0.10441114],
+[-0.53128038, 1.02973269, -0.43813562, -1.11831825]])
+In [4]: exit
+(base) root@pyalgo:~#
+
+Conda as a Package Manager
+
+|
+
+25
+
+Executing conda list shows which packages are installed:
+(base) root@pyalgo:~# conda list
+# packages in environment at /root/miniconda3:
+#
+# Name
+Version
+Build Channel
+_libgcc_mutex
+0.1
+main
+backcall
+0.2.0
+py_0
+blas
+1.0
+mkl
+blosc
+1.20.0
+hd408876_0
+...
+zlib
+1.2.11
+h7b6447c_3
+zstd
+1.4.5
+h9ceee32_0
+(base) root@pyalgo:~#
+
+In case a package is not needed anymore, it is efficiently removed with conda remove:
+(base) root@pyalgo:~# conda remove matplotlib
+Collecting package metadata (repodata.json): done
+Solving environment: done
+## Package Plan ##
+environment location: /root/miniconda3
+removed specs:
+- matplotlib
+
+The following packages will be REMOVED:
+The following packages will be REMOVED:
+cycler-0.10.0-py38_0
+...
+tornado-6.0.4-py38h7b6447c_1
+
+Proceed ([y]/n)? y
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(base) root@pyalgo:~#
+
+conda as a package manager is already quite useful. However, its full power only
+
+becomes evident when adding virtual environment management to the mix.
+
+26
+
+|
+
+Chapter 2: Python Infrastructure
+
+conda as a package manager makes installing, updating, and
+
+removing Python packages a pleasant experience. There is no need
+to take care of building and compiling packages on your own,
+which can be tricky sometimes given the list of dependencies a
+package specifies and given the specifics to be considered on differ‐
+ent operating systems.
+
+Conda as a Virtual Environment Manager
+Having installed Miniconda with conda included provides a default Python installa‐
+tion depending on what version of Miniconda has been chosen. The virtual environ‐
+ment management capabilities of conda allow one, for example, to add to a Python
+3.8 default installation a completely separated installation of Python 2.7.x. To this
+end, conda offers the following functionality:
+Creating a virtual environment
+conda create --name $ENVIRONMENT_NAME
+Activating an environment
+conda activate $ENVIRONMENT_NAME
+Deactivating an environment
+conda deactivate $ENVIRONMENT_NAME
+Removing an environment
+conda env remove --name $ENVIRONMENT_NAME
+Exporting to an environment file
+conda env export > $FILE_NAME
+Creating an environment from a file
+conda env create -f $FILE_NAME
+Listing all environments
+conda info --envs
+As a simple illustration, the example code that follows creates an environment called
+py27, installs IPython, and executes a line of Python 2.7.x code. Although the support
+for Python 2.7 has ended, the example illustrates how legacy Python 2.7 code can
+easily be executed and tested:
+(base) root@pyalgo:~# conda create --name py27 python=2.7
+Collecting package metadata (current_repodata.json): done
+Solving environment: failed with repodata from current_repodata.json,
+will retry with next repodata source.
+Collecting package metadata (repodata.json): done
+Solving environment: done
+
+Conda as a Virtual Environment Manager
+
+|
+
+27
+
+## Package Plan ##
+environment location: /root/miniconda3/envs/py27
+added / updated specs:
+- python=2.7
+
+The following packages will be downloaded:
+package
+|
+build
+---------------------------|----------------certifi-2019.11.28
+|
+py27_0
+153 KB
+pip-19.3.1
+|
+py27_0
+1.7 MB
+python-2.7.18
+|
+h15b4118_1
+9.9 MB
+setuptools-44.0.0
+|
+py27_0
+512 KB
+wheel-0.33.6
+|
+py27_0
+42 KB
+-----------------------------------------------------------Total:
+12.2 MB
+The following NEW packages will be INSTALLED:
+_libgcc_mutex
+ca-certificates
+...
+zlib
+
+pkgs/main/linux-64::_libgcc_mutex-0.1-main
+pkgs/main/linux-64::ca-certificates-2020.6.24-0
+pkgs/main/linux-64::zlib-1.2.11-h7b6447c_3
+
+Proceed ([y]/n)? y
+
+Downloading and Extracting Packages
+certifi-2019.11.28
+| 153 KB
+| ############################### | 100%
+python-2.7.18
+| 9.9 MB
+| ############################### | 100%
+pip-19.3.1
+| 1.7 MB
+| ############################### | 100%
+setuptools-44.0.0
+| 512 KB
+| ############################### | 100%
+wheel-0.33.6
+| 42 KB
+| ############################### | 100%
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+#
+# To activate this environment, use
+#
+#
+$ conda activate py27
+#
+# To deactivate an active environment, use
+#
+#
+$ conda deactivate
+(base) root@pyalgo:~#
+
+28
+
+|
+
+Chapter 2: Python Infrastructure
+
+Notice how the prompt changes to include (py27) after the environment is activated:
+(base) root@pyalgo:~# conda activate py27
+(py27) root@pyalgo:~# pip install ipython
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020.
+...
+Executing transaction: done
+(py27) root@pyalgo:~#
+
+Finally, this allows one to use IPython with Python 2.7 syntax:
+(py27) root@pyalgo:~# ipython
+Python 2.7.18 |Anaconda, Inc.| (default, Apr 23 2020, 22:42:48)
+Type "copyright", "credits" or "license" for more information.
+IPython 5.10.0 -- An enhanced Interactive Python.
+?
+-> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help
+-> Python's own help system.
+object?
+-> Details about 'object', use 'object??' for extra details.
+In [1]: print "Hello Python for Algorithmic Trading World."
+Hello Python for Algorithmic Trading World.
+In [2]: exit
+(py27) root@pyalgo:~#
+
+As this example demonstrates, conda as a virtual environment manager allows one to
+install different Python versions alongside each other. It also allows one to install dif‐
+ferent versions of certain packages. The default Python installation is not influenced
+by such a procedure, nor are other environments that might exist on the same
+machine. All available environments can be shown via conda info --envs:
+(py27) root@pyalgo:~# conda env list
+# conda environments:
+#
+base
+/root/miniconda3
+py27
+* /root/miniconda3/envs/py27
+(py27) root@pyalgo:~#
+
+Sometimes it is necessary to share environment information with others or to use
+environment information on multiple machines, for instance. To this end, one can
+export the installed packages list to a file with conda env export. However, this only
+works properly by default for the same operating system since the build versions are
+specified in the resulting yaml file. However, they can be deleted to only specify the
+package version via the --no-builds flag:
+(py27) root@pyalgo:~# conda deactivate
+(base) root@pyalgo:~# conda env export --no-builds > base.yml
+(base) root@pyalgo:~# cat base.yml
+name: base
+
+Conda as a Virtual Environment Manager
+
+|
+
+29
+
+channels:
+- defaults
+dependencies:
+- _libgcc_mutex=0.1
+- backcall=0.2.0
+- blas=1.0
+- blosc=1.20.0
+...
+- zlib=1.2.11
+- zstd=1.4.5
+prefix: /root/miniconda3
+(base) root@pyalgo:~#
+
+Often, virtual environments, which are technically not that much more than a certain
+(sub-)folder structure, are created to do some quick tests.4 In such a case, an environ‐
+ment is easily removed (after deactivation) via conda env remove:
+(base) root@pyalgo:~# conda env remove -n py27
+Remove all packages in environment /root/miniconda3/envs/py27:
+(base) root@pyalgo:~#
+
+This concludes the overview of conda as a virtual environment manager.
+conda not only helps with managing packages, but it is also a vir‐
+
+tual environment manager for Python. It simplifies the creation of
+different Python environments, allowing one to have multiple ver‐
+sions of Python and optional packages available on the same
+machine without them influencing each other in any way. conda
+also allows one to export environment information to easily repli‐
+cate it on multiple machines or to share it with others.
+
+Using Docker Containers
+Docker containers have taken the IT world by storm (see Docker). Although the
+technology is still relatively young, it has established itself as one of the benchmarks
+for the efficient development and deployment of almost any kind of software applica‐
+tion.
+For our purposes, it suffices to think of a Docker container as a separated (“contain‐
+erized”) file system that includes an operating system (for example, Ubuntu 20.04 LTS
+for server), a (Python) runtime, additional system and development tools, and
+
+4 In the official documentation, you will find the following explanation: “Python Virtual Environments allow
+
+Python packages to be installed in an isolated location for a particular application, rather than being installed
+globally.” See the Creating Virtual Environments page.
+
+30
+
+|
+
+Chapter 2: Python Infrastructure
+
+
