@@ -51,6 +51,34 @@ python-algo-trading/
 
 ---
 
+## 🗺️ Strategy Development Roadmap
+
+### Current System
+```
+Entry: MTPR (price below historical range)
+Exit:  Cycle Indicators (RSI Stoch, STC Cycle)
+```
+
+### Future Research
+| Topic | Goal |
+|-------|------|
+| Timeframe Optimization | Find most profitable TF via backtesting |
+| Risk Management | VIX monitoring, drawdown control |
+| Market Regime | SPY/QQQ trend filter for bull/bear detection |
+
+### Evolution Path
+```
+Level 1: Individual stock signals (MTPR + Cycles)
+    ↓
+Level 2: Backtesting & optimization
+    ↓
+Level 3: Market regime integration
+         Bull → Long individual stocks
+         Bear → Cash or hedge
+```
+
+---
+
 ## 📖 Book Reference
 
 **"Python for Algorithmic Trading"** by Yves Hilpisch
