@@ -9,7 +9,7 @@
 | Week | Topic | Status |
 |------|-------|--------|
 | Week 1 | Python Environment & Basics | ✅ Complete |
-| Week 2 | MTPR Indicator Development | 🔄 In Progress |
+| Week 2 | Custom Indicator Development | 🔄 In Progress |
 | Week 3-4 | Financial Data Analysis | ⏳ Planned |
 
 ---
@@ -24,7 +24,7 @@ A price range analysis indicator based on **Donchian Channel** concepts.
 - **References**: Corporate Finance Institute, Investopedia
 
 ### Implementation
-Uses long-term (500 days), medium-term (250 days), and short-term (90 days) price ranges with EMA smoothing to analyze price position relative to historical ranges.
+> Note: Core calculation logic is proprietary.
 
 ---
 
@@ -51,31 +51,12 @@ python-algo-trading/
 
 ---
 
-## 🗺️ Strategy Development Roadmap
+## 🗺️ Research Direction
 
-### Current System
-```
-Entry: MTPR (price below historical range)
-Exit:  Cycle Indicators (RSI Stoch, STC Cycle)
-```
-
-### Future Research
-| Topic | Goal |
-|-------|------|
-| Timeframe Optimization | Find most profitable TF via backtesting |
-| Risk Management | VIX monitoring, drawdown control |
-| Market Regime | SPY/QQQ trend filter for bull/bear detection |
-
-### Evolution Path
-```
-Level 1: Individual stock signals (MTPR + Cycles)
-    ↓
-Level 2: Backtesting & optimization
-    ↓
-Level 3: Market regime integration
-         Bull → Long individual stocks
-         Bear → Cash or hedge
-```
+Currently exploring:
+- Technical indicator development in Python
+- Multi-timeframe analysis
+- Backtesting methodologies
 
 ---
 
